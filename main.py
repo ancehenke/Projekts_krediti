@@ -45,6 +45,9 @@ class Kredits:
 
     def kopeja_summa(self):
         return round(sum([x[1] + x[2] for x in self.atmaksas_grafiks]), 2) # Tas, ko mēs samaksājam kopā
+    
+    def interese_procentuali(self):
+        return round((self.kopeja_intereses_summa() / self.pamatsumma) * 100, 2)
 
 def izveidot_excel_failu(kredits1, kredits2, faila_vards="kreditu_salidzinasana.xlsx"):
     wb = Workbook()
@@ -55,35 +58,40 @@ def izveidot_excel_failu(kredits1, kredits2, faila_vards="kreditu_salidzinasana.
     ws.append(["Kredīta nosaukums", kredits1.nosaukums, kredits2.nosaukums])
     ws.append(["Pamatsumma (€)", kredits1.pamatsumma, kredits2.pamatsumma])
     ws.append(["Gada procentu likme (%)", kredits1.gada_procenti * 100, kredits2.gada_procenti * 100])
-    ws.append(["Termiņš (mēneši)", kredits1.termins, kredits2.termins])
+    ws.append(["Termiņš (mēnešos)", kredits1.termins, kredits2.termins])
     ws.append(["Fiksētais mēneša maksājums (€)", round(kredits1.menesa_maksa, 2), round(kredits2.menesa_maksa, 2)])
     ws.append([])
 
-    ws.append(["Kopējie procenti (€)", kredits1.kopeja_intereses_summa(), kredits2.kopeja_intereses_summa()])
+    ws.append(["Kopējā interese (€)", kredits1.kopeja_intereses_summa(), kredits2.kopeja_intereses_summa()])
     ws.append(["Kopējā atmaksas summa (€)", kredits1.kopeja_summa(), kredits2.kopeja_summa()])
     ws.append([])
+
+    ws.append(["Interese % no aizņēmuma summas", kredits1.interese_procentuali(), kredits2.interese_procentuali()])
+    ws.appedn([])
 
     max_rindu = max(len(kredits1.atmaksas_grafiks), len(kredits2.atmaksas_grafiks))
 
     ws.append([
     "Mēnesis", 
-    f"{kredits1.nosaukums} - Procenti",
-    f"{kredits2.nosaukums} - Procenti", 
-
+    f"{kredits1.nosaukums} - Interese",
     f"{kredits1.nosaukums} - Pamatsumma",
-    f"{kredits2.nosaukums} - Pamatsumma",  
     f"{kredits1.nosaukums} - Atlikums",
- 
 
+    f"{kredits2.nosaukums} - Interese", 
+    f"{kredits2.nosaukums} - Pamatsumma",
     f"{kredits2.nosaukums} - Atlikums"
     ])
 
     for i in range(max_rindu):
         rinda = []
+
         if i < len(kredits1.atmaksas_grafiks):
-            rinda.append(kredits1.atmaksas_grafiks[i][0])
+            menesis = i + 1
+        elif i < len(kredits2.atmaksas_grafiks):
+            menesis = i + 1    
         else:
-            rinda.append("")
+            menesis = ""
+        rinda.append(menesis)
 
         if i < len(kredits1.atmaksas_grafiks):
             rinda.extend(kredits1.atmaksas_grafiks[i][1:])
@@ -94,6 +102,7 @@ def izveidot_excel_failu(kredits1, kredits2, faila_vards="kreditu_salidzinasana.
             rinda.extend(kredits2.atmaksas_grafiks[i][1:])
         else:
             rinda.extend(["", "", ""])
+
         ws.append(rinda)            
 
     wb.save(faila_vards)
