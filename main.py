@@ -40,14 +40,17 @@ class Kredits:
             if atlikums <= 0:
                 break 
 
+    def kopeja_summa(self):
+        return round(sum([x[1] + x[2] for x in self.atmaksas_grafiks]), 2) # Tas, ko mēs samaksājam kopā            
+
     def kopeja_intereses_summa(self):
         return round(sum([x[1] for x in self.atmaksas_grafiks]), 2)
-
-    def kopeja_summa(self):
-        return round(sum([x[1] + x[2] for x in self.atmaksas_grafiks]), 2) # Tas, ko mēs samaksājam kopā
     
     def interese_procentuali(self):
         return round((self.kopeja_intereses_summa() / self.pamatsumma) * 100, 2)
+    
+    def koeficients(self): # cik jāmaksā par katru aizņemto eiro
+        return round(self.kopeja_summa() / self.pamatsumma, 4)
 
 def izveidot_excel_failu(kredits1, kredits2, faila_vards="kreditu_salidzinasana.xlsx"):
     wb = Workbook()
@@ -62,12 +65,13 @@ def izveidot_excel_failu(kredits1, kredits2, faila_vards="kreditu_salidzinasana.
     ws.append(["Fiksētais mēneša maksājums (€)", round(kredits1.menesa_maksa, 2), round(kredits2.menesa_maksa, 2)])
     ws.append([])
 
-    ws.append(["Kopējā interese (€)", kredits1.kopeja_intereses_summa(), kredits2.kopeja_intereses_summa()])
     ws.append(["Kopējā atmaksas summa (€)", kredits1.kopeja_summa(), kredits2.kopeja_summa()])
     ws.append([])
 
+    ws.append(["Kopējā interese (€)", kredits1.kopeja_intereses_summa(), kredits2.kopeja_intereses_summa()])
     ws.append(["Interese % no aizņēmuma summas", kredits1.interese_procentuali(), kredits2.interese_procentuali()])
-    ws.appedn([])
+    ws.append(["Aizņēmuma koeficients", kredits1.koeficients(), kredits2.koeficients()])
+    ws.append([])
 
     max_rindu = max(len(kredits1.atmaksas_grafiks), len(kredits2.atmaksas_grafiks))
 
@@ -118,10 +122,14 @@ def main():
     izveidot_excel_failu(kredits1, kredits2)
 
     print("\nSalīdzinājums:")
-    if kredits1.kopeja_summa() < kredits2.kopeja_summa():
-        print(f"Kredīts '{kredits1.nosaukums}' ir izdevīgāks, skatoties pēc kopējām izmaksām.")
+
+    kredits1_koeficients = kredits1.koeficients()
+    kredits2_koeficients = kredits2.koeficients()
+
+    if kredits1_koeficients < kredits2_koeficients:
+        print(f"Kredīts '{kredits1.nosaukums}' ir izdevīgāks, skatoties pēc atmaksas efektivitātes.")
     else:
-        print(f"Kredīts '{kredits2.nosaukums}' ir izdevīgāks, skatoties pēc kopējām izmaksām.")
+        print(f"Kredīts '{kredits2.nosaukums}' ir izdevīgāks, skatoties pēc atmaksas efektivitātes.")
 
 if __name__ == "__main__":
     main()
