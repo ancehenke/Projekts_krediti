@@ -25,7 +25,7 @@ class Kredits:
         if i == 0:
             return P / n
         else:
-           return P * (i * (1 + i) ** n) / ((1 + i) ** n - 1) # = A
+           return P * (i * (1 + i) ** n) / ((1 + i) ** n - 1) # = A (anuitāte)
         
     def aprekina_atmaksas_grafiku(self):
         atlikums = self.pamatsumma # atlikums ir tas, cik vēl bankai jāmaksā
@@ -41,7 +41,8 @@ class Kredits:
                 break 
 
     def kopeja_summa(self):
-        return round(sum([x[1] + x[2] for x in self.atmaksas_grafiks]), 2) # Tas, ko mēs samaksājam kopā            
+        return round(sum([x[1] + x[2] for x in self.atmaksas_grafiks]), 2) # Tas, ko mēs samaksājam kopā
+              
 
     def kopeja_intereses_summa(self):
         return round(sum([x[1] for x in self.atmaksas_grafiks]), 2)
@@ -70,6 +71,7 @@ def izveidot_excel_failu(kredits1, kredits2, faila_vards="kreditu_salidzinasana.
 
     ws.append(["Kopējā interese (€)", kredits1.kopeja_intereses_summa(), kredits2.kopeja_intereses_summa()])
     ws.append(["Interese % no aizņēmuma summas", kredits1.interese_procentuali(), kredits2.interese_procentuali()])
+    ws.append(["Anuitātes summa (€)", kredits1.aprekinat_menesa_maksu(), kredits2.aprekinat_menesa_maksu()])
     ws.append(["Aizņēmuma koeficients", kredits1.koeficients(), kredits2.koeficients()])
     ws.append([])
 
@@ -78,11 +80,11 @@ def izveidot_excel_failu(kredits1, kredits2, faila_vards="kreditu_salidzinasana.
     ws.append([
     "Mēnesis", 
     f"{kredits1.nosaukums} - Interese",
-    f"{kredits1.nosaukums} - Pamatsumma",
+    f"{kredits1.nosaukums} - Summa, kas iet nost no parāda",
     f"{kredits1.nosaukums} - Atlikums",
 
     f"{kredits2.nosaukums} - Interese", 
-    f"{kredits2.nosaukums} - Pamatsumma",
+    f"{kredits2.nosaukums} - Summa, kas iet nost no parāda",
     f"{kredits2.nosaukums} - Atlikums"
     ])
 
