@@ -63,7 +63,6 @@ def izveidot_excel_failu(kredits1, kredits2, faila_vards="kreditu_salidzinasana.
     ws.append(["Pamatsumma (€)", kredits1.pamatsumma, kredits2.pamatsumma])
     ws.append(["Gada procentu likme (%)", kredits1.gada_procenti * 100, kredits2.gada_procenti * 100])
     ws.append(["Termiņš (mēnešos)", kredits1.termins, kredits2.termins])
-    ws.append(["Fiksētais mēneša maksājums (€)", round(kredits1.menesa_maksa, 2), round(kredits2.menesa_maksa, 2)])
     ws.append([])
 
     ws.append(["Kopējā atmaksas summa (€)", kredits1.kopeja_summa(), kredits2.kopeja_summa()])
@@ -71,7 +70,7 @@ def izveidot_excel_failu(kredits1, kredits2, faila_vards="kreditu_salidzinasana.
 
     ws.append(["Kopējā interese (€)", kredits1.kopeja_intereses_summa(), kredits2.kopeja_intereses_summa()])
     ws.append(["Interese % no aizņēmuma summas", kredits1.interese_procentuali(), kredits2.interese_procentuali()])
-    ws.append(["Anuitātes summa (€)", kredits1.aprekinat_menesa_maksu(), kredits2.aprekinat_menesa_maksu()])
+    ws.append(["Anuitātes summa (€)", round(kredits1.aprekinat_menesa_maksu(), 2), round(kredits2.aprekinat_menesa_maksu(), 2)])
     ws.append(["Aizņēmuma koeficients", kredits1.koeficients(), kredits2.koeficients()])
     ws.append([])
 
