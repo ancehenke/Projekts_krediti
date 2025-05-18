@@ -7,7 +7,7 @@ Projekta mērķis bija izveidot programmu, kas, balstoties uz lietotāja ievadī
 
 Papildus lietotājam ir arī iespēja simulēt papildus iemaksas konkrētā mēnesī, lai redzētu, kā tas ietekmē kredīta atlikumu, atmaksas ilgumu un kopējo summu.
 
-Visi rezultāti tirk saglabāti _EXCEL_ failā 'kreditu_salidzinasana', kur iespējams ērti pārskatīt un salīdzinat gan abus kredītu atmaksas grafikus, gan to, kā tie izmainās pirms un pēc papildus iemaksas veikšanas.
+Visi rezultāti tirk saglabāti _EXCEL_ failā `kreditu_salidzinasana`, kur iespējams ērti pārskatīt un salīdzinat gan abus kredītu atmaksas grafikus, gan to, kā tie izmainās pirms un pēc papildus iemaksas veikšanas.
 
 Projektu iespējams pielietot arī priekšmeta _Finanšu matemātika_ atsevišķu uzdevumu pārbaudei.
 
