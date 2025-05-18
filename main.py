@@ -124,7 +124,7 @@ class Kredits:
 def nokopet_grafiku(grafiks):
     return [(m, i, s, a) for m, i, s, a in grafiks] # m - mēnesis; i - procentu maksājums; s - summa, kas iet nost no parāda; a - atlikusī kredīta daļa
 
-def izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez, faila_vards="kreditu_salidzinasana.xlsx"):
+def izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez, menesis=None, summa=None, faila_vards="kreditu_salidzinasana.xlsx"):
     wb = Workbook()
     ws = wb.active
     ws.title = "Kredītu salīdzinājums"
@@ -179,7 +179,11 @@ def izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez, faila_v
     )
 
     if ir_papildus_iemaksas:
-        ws_2 = wb.create_sheet("Pēc papildiemaksas")
+        if menesis is not None and summa is not None:
+            nosaukums = f"Pēc papildiemaksas ({menesis}, {summa})"
+        else:
+            nosaukums = "Pēc papildiemaksas"
+        ws_2 = wb.create_sheet(nosaukums)
     
         max_rindu_2 = max(len(kredits1.atmaksas_grafiks), len(kredits2.atmaksas_grafiks))
 
@@ -231,7 +235,7 @@ def main():
     kredits1.aprekina_atmaksas_grafiku() # pēc papildiemaksas
     kredits2.aprekina_atmaksas_grafiku() # pēc papildiemaksas
 
-    izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez)
+    izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez, menesis=menesis, summa=summa)
 
     print("\nSalīdzinājums:")
 
