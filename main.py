@@ -28,7 +28,12 @@ class Kredits:
            return P * (i * (1 + i) ** n) / ((1 + i) ** n - 1) # = A (anuitāte)
         
     def aprekina_atmaksas_grafiku(self):
+        self.atmaksas_grafiks.clear()
+        self._kopeja_summa = 0
+        self._kopeja_intereses_summa = 0
+
         atlikums = self.pamatsumma # atlikums ir tas, cik vēl bankai jāmaksā
+        
         for menesis in range(1, self.termins + 1):
             interese = atlikums * (self.gada_procenti / 12)
             atmaksas_summa = self.menesa_maksa - interese
@@ -37,15 +42,19 @@ class Kredits:
                 atmaksas_summa += atlikums
                 atlikums = 0
             self.atmaksas_grafiks.append((menesis, round(interese, 2), round(atmaksas_summa, 2), round(atlikums, 2)))
+            
+            self._kopeja_summa += interese + atmaksas_summa
+            self._kopeja_intereses_summa += interese
+
             if atlikums <= 0:
                 break 
 
     def kopeja_summa(self):
-        return round(sum([x[1] + x[2] for x in self.atmaksas_grafiks]), 2) # Tas, ko mēs samaksājam kopā
+        return round(self._kopeja_summa, 2) # Tas, ko mēs samaksājam kopā
               
 
     def kopeja_intereses_summa(self):
-        return round(sum([x[1] for x in self.atmaksas_grafiks]), 2)
+        return round(self._kopeja_intereses_summa, 2)
     
     def interese_procentuali(self):
         return round((self.kopeja_intereses_summa() / self.pamatsumma) * 100, 2)
