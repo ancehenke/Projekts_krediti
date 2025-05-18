@@ -77,14 +77,27 @@ class Kredits:
         iemaksa = Papildus_iemaksa(menesis, summa)
         self.papildus_iemaksas.pievienot_elementu(iemaksa)    
         
-    def aprekina_atmaksas_grafiku(self):
-        self.atmaksas_grafiks.clear()
+    def aprekina_atmaksas_grafiku(self, sakt_no_menesa=1):
+        if sakt_no_menesa == 1:
+            self.atmaksas_grafiks.clear()
+            atlikums = self.pamatsumma # atlikums ir tas, cik vēl bankai jāmaksā
+        else:
+            atlikusais_grafiks = self.atmaksas_grafiks[:sakt_no_menesa - 1]
+            self.atmaksas_grafiks = atlikusais_grafiks
+            if atlikusais_grafiks:
+                atlikums = atlikusais_grafiks[-1][3]
+            else:
+                atlikums = self.pamatsumma
+
         self._kopeja_summa = 0
         self._kopeja_intereses_summa = 0
 
-        atlikums = self.pamatsumma # atlikums ir tas, cik vēl bankai jāmaksā
+        if sakt_no_menesa > 1:
+            for _, i, s, _ in self.atmaksas_grafiks:
+                self._kopeja_summa += i + s
+                self._kopeja_intereses_summa += i
         
-        for menesis in range(1, self.termins + 1):
+        for menesis in range(sakt_no_menesa, self.termins + 1):
 
             while (not self.papildus_iemaksas.tuksa_rinda() and self.papildus_iemaksas.paskatit_pirmo().menesis == menesis):
                 iemaksa = self.papildus_iemaksas.iznemt_elementu()
@@ -226,14 +239,17 @@ def main():
     kredits2_bez = nokopet_grafiku(kredits2.atmaksas_grafiks)
 
     atbilde = input(f"Vai vēlaties kādā mēnesī veikt papildus iemaksu kredītiem (jā/nē)? ").strip().lower()
+    menesis = None
+    summa = None
+
     if atbilde == "jā":
         menesis = int(input("Kurā mēnesī vēlaties veikt papildiemaksu? "))
         summa = float(input("Cik euro iemaksāsiet papildus? "))
         kredits1.pievienot_papildus_iemaksu(menesis, summa)
         kredits2.pievienot_papildus_iemaksu(menesis, summa)
 
-    kredits1.aprekina_atmaksas_grafiku() # pēc papildiemaksas
-    kredits2.aprekina_atmaksas_grafiku() # pēc papildiemaksas
+        kredits1.aprekina_atmaksas_grafiku(sakt_no_menesa=menesis) # pēc papildiemaksas
+        kredits2.aprekina_atmaksas_grafiku(sakt_no_menesa=menesis) # pēc papildiemaksas
 
     izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez, menesis=menesis, summa=summa)
 
