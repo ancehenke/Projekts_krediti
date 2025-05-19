@@ -142,7 +142,7 @@ def izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez, menesis
     ws = wb.active
     ws.title = "Kredītu salīdzinājums"
 
-    # Virsraksti tabulā
+    # Virsraksti pamatinformācijai
     ws.append(["Kredīta nosaukums", kredits1.nosaukums, kredits2.nosaukums])
     ws.append(["Pamatsumma (€)", kredits1.pamatsumma, kredits2.pamatsumma])
     ws.append(["Gada procentu likme (%)", kredits1.gada_procenti * 100, kredits2.gada_procenti * 100])
@@ -158,8 +158,9 @@ def izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez, menesis
     ws.append(["Aizņēmuma koeficients", kredits1.koeficients(), kredits2.koeficients()])
     ws.append([])
 
-    max_rindu = max(len(kredits1_bez), len(kredits2_bez))
+    max_rindu = max(len(kredits1_bez), len(kredits2_bez)) # Lai saprastu, cik rindu jāizveido Excel
 
+    # Virsraksti atmaksas grafika tabulai
     ws.append([
     "Mēnesis", 
     f"{kredits1.nosaukums} - Interese",
@@ -175,7 +176,7 @@ def izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez, menesis
         rinda = [i + 1]
 
         if i < len(kredits1_bez):
-            rinda.extend(kredits1_bez[i][1:])
+            rinda.extend(kredits1_bez[i][1:]) # Ņem pēdējos 3 laukus bez mēneša nr.
         else:
             rinda.extend(["", "", ""])
 
@@ -186,11 +187,13 @@ def izveidot_excel_failu(kredits1, kredits2, kredits1_bez, kredits2_bez, menesis
 
         ws.append(rinda)
 
-    ir_papildus_iemaksas = (
+    # Ja grafiki ar un bez papildiemaksām atšķiras, tad bija papildiemaksas
+    ir_papildus_iemaksas = (      
         kredits1.atmaksas_grafiks != kredits1_bez or
         kredits2.atmaksas_grafiks != kredits2_bez
-    )
+    ) 
 
+    # Vai papildiemaksa definēta ar mēnesi un summu
     if ir_papildus_iemaksas:
         if menesis is not None and summa is not None:
             nosaukums = f"Pēc papildiemaksas ({menesis}, {summa})"
