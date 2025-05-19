@@ -2,6 +2,7 @@
 ### Projekta temata izvēles pamatojums
 Mācos finanšu inženieriju, tāpēc vēlējos izstrādat projekta darbu, kas sevī apvienotu gan skaitliskus aprēķinus, gan _Datu struktūras un algoritmi_ priekšmetā apgūto. Tā kā savā nākotnes profesionālajā darbā visticamāk nāksies saskarties ar _Excel_ izmantošanu, nolēmu šīprojekta izstrādes laikā apgūt un praktiski pielietot 'openpyxl' bibliotēku.
 
+
 ## Projekta uzdevums
 Projekta mērķis bija izveidot programmu, kas, balstoties uz lietotāja ievadīto informāciju veic aprēķinus un salīdzina divus kredītus.
 
@@ -26,6 +27,7 @@ Aprēķinātie un apkopotie rezultāti tiek saglabāti _Excel_ failā `kreditu_s
    – atmaksas grafiks pēc papildus iemaksām (2. darba lapa), ja tādas tiek veiktas.
 5. Izmantojot aizņēmuma koeficientu, tiek salīdzināts, kurš kredīts izdevīgāks.
 
+
 ## Izmantotā Python bibliotēka
 **Openpyxl** – Python bibliotēka, kuru izmanto, lai izveidotu, rakstītu vai lasītu no _Excel_ faila.
 ### Pielietojums manā kodā
@@ -37,6 +39,7 @@ Aprēķinātie un apkopotie rezultāti tiek saglabāti _Excel_ failā `kreditu_s
 ### Kāpēc pielietota tieši šī bibliotēka?
 **Openpyxl** bibliotēka tika izvēlēta, jo tā ļāva ērti izveidot un saglabāt _Excel_ failus no Python koda. Šī bibliotēka atbalsta `.xlsx` formātu, kas ir plaši izplatīts formāts tieši finanšu aprēķinos. Ievāktie dati tiek vizuāli un strukturēti attēloti tā, lai lietotājs tos varētu pārskatīt daudz vieglāk. Dati saprotami arī cilvēkiem bez programmēšanas zināšanām.
 
+
 ## Manis izmantotās un definētās datu struktūras
 Šī projekta ietvaros tika definēta datu struktūra **rinda** jeb **_(queue)_**. Tā tika realizēta ar klasēm `Rinda` un `Mezgls_rindai`.
 ### Kāpēc izvēlēta rinda?
@@ -46,6 +49,7 @@ Kredīta maksājumiem ir būtiska secība, jo katrs veiktais maksājums ietekmē
 Kodā tas redzams tieši darbībās ar papildus iemaksām. Piemēram,
 
 Programmas izstrādei izmantotas arī citas datu struktūras – **saraksti** un **vardnīcas**.
+
 
 ## Programmatūras izmantošanas metodes
 Programma paredzēta kredītu salīdzināšanai, ļaujot lietotājam ievadīt datus un modelēt dažādus atmaksas scenārijus, tai skaitā ar papildus iemaksām. Tā nodrošina skaidru vizualizāciju caur automatizēti ģenerētu _Excel_ failu, padarot rezultātu pārskatāmu un praktiski pielietojamu finanšu lēmumu pieņemšanā.
