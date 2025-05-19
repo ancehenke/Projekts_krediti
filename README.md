@@ -13,17 +13,18 @@ Aprēķinātie un apkopotie rezultāti tiek saglabāti _Excel_ failā `kreditu_s
 **Openpyxl** – Python bibliotēka, kuru izmanto, lai izveidotu, rakstītu vai lasītu no _Excel_ faila.
 ### Pielietojums manā kodā
 1. `Workbook()` – izveido jaunu _Excel_ failu.
-2. `wb.active` un `create_sheet()` – izveido darba lapas.
-3. `ws.append([])` – darba lapā pievieno rindas ar datiem.
-4. `wb.save(faila_nosaukums)` – saglabā failu ar konkrēto nosaukumu.
+2. `wb.active` – ļauj strādat ar pirmo darba lapu.
+3. `create_sheet()` – izveido jaunu darba lapu.
+4. `ws.append([])` – darba lapā pievieno rindas ar datiem.
+5. `wb.save(faila_nosaukums)` – saglabā failu ar konkrēto nosaukumu.
 ### Kāpēc pielietota tieši šī bibliotēka?
 **Openpyxl** bibliotēka tika izvēlēta, jo tā ļāva ērti izveidot un saglabāt _Excel_ failus no Python koda. Šī bibliotēka atbalsta `.xlsx` formātu, kas ir plaši izplatīts formāts tieši finanšu aprēķinos. Ievāktie dati tiek vizuāli un strukturēti attēloti tā, lai lietotājs tos varētu pārskatīt daudz vieglāk. Dati saprotami arī cilvēkiem bez programmēšanas zināšanām.
 
 ## Manis izmantotās un definētās datu struktūras
-Šī projekta ietvaros tika definēta un izmantota pašveidota **rinda** **_(queue)_**, ko realizēju ar klasēm `Rinda` un `Mezgls_rindai`. Rinda tika izveidota, lai saglabātu un apstrādātu datus par kredīta maksājumiem to hronoloģiskajā secībā. Šāda datu struktūra ļāva pārvaldīt maksājumu grafiku tieši tādā veidā, kādā tas notiek realitātē – mēnesis seko mēnesim, un dati tiek "patērēti" šajā pašā kārtībā (FIFO princips).
+Šī projekta ietvaros tika definēta datu struktūra **rinda** jeb **_(queue)_**. Tā tika realizēta ar klasēm `Rinda` un `Mezgls_rindai`.
 ### Kāpēc izvēlēta rinda?
-Kredīta maksājumiem ir būtiska secība, jo katrs veiktais maksājums ietekmē nākamo. Datu struktūra rinda šo principu lieliski attēlo, izmantojot to pašu loģiku – pirmais tiek izņemts pirmais maksājums, nākamie seko.
-Šī datu struktūtas izmantošana nodrošināja _time complexity_ O(1) tādām darbībām kā datu pievienošanai un noņemšanai.
+Kredīta maksājumiem ir būtiska secība, jo katrs veiktais maksājums ietekmē nākamo (svarīga hronoloģiska secība). Datu struktūra rinda ļāva pārvaldīt maksājumu grafiku tieši tādā veidā, kādā tas notiek realitātē – mēnesis seko mēnesim, un dati tiek "patērēti" šajā pašā kārtībā (FIFO princips).
+Šī datu struktūtas izmantošana nodrošināja _time complexity_ O(1) tādām darbībām kā datu pievienošanai beigās un noņemšanai no sākuma.
 
 Kodā tas redzams tieši darbībās ar papildus iemaksām. Piemēram,
 `while (not self.papildus_iemaksas.tuksa_rinda() and self.papildus_iemaksas.paskatit_pirmo().menesis == menesis):
