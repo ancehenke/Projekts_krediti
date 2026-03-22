@@ -1,6 +1,6 @@
 # Projekts – kredītu salīdzināšana
 ### Projekta temata izvēles pamatojums
-Mācos finanšu inženieriju, tāpēc vēlējos izstrādat projekta darbu, kas sevī apvienotu gan skaitliskus aprēķinus, gan _Datu struktūras un algoritmi_ priekšmetā apgūto. Tā kā savā nākotnes profesionālajā darbā visticamāk nāksies saskarties ar _Excel_ izmantošanu, nolēmu šīprojekta izstrādes laikā apgūt un praktiski pielietot 'openpyxl' bibliotēku.
+Mācos finanšu inženieriju, tāpēc vēlējos izstrādat projekta darbu, kas sevī apvienotu gan skaitliskus aprēķinus, gan _Datu struktūras un algoritmi_ priekšmetā apgūto. Tā kā savā nākotnes profesionālajā darbā visticamāk nāksies saskarties ar _Excel_ izmantošanu, nolēmu šī projekta izstrādes laikā apgūt un praktiski pielietot 'openpyxl' bibliotēku.
 
 
 ## Projekta uzdevums
