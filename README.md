@@ -1,14 +1,19 @@
 # Projekts – kredītu salīdzināšana
-### Projekta temata izvēles pamatojums
-Mācos finanšu inženieriju, tāpēc vēlējos izstrādat projekta darbu, kas sevī apvienotu gan skaitliskus aprēķinus, gan _Datu struktūras un algoritmi_ priekšmetā apgūto. Tā kā savā nākotnes profesionālajā darbā visticamāk nāksies saskarties ar _Excel_ izmantošanu, nolēmu šī projekta izstrādes laikā apgūt un praktiski pielietot 'openpyxl' bibliotēku.
+### Projekta apraksts
+Šis projekts izstrādāts Python valodā ar mērķi apvienot finanšu aprēķinus un datu struktūru izmantošanu. Projekta ietvaros izveidota programma, kas, balstoties uz lietotāja ievadītajiem datiem, aprēķina un salīdzina divus kredītus.
+
+Papildus tiek nodrošināta iespēja modelēt papildus iemaksas un analizēt to ietekmi uz kredīta atmaksas grafiku, kopējām izmaksām un termiņu.
+
+Rezultāti tiek strukturēti un saglabāti Excel failā, padarot tos viegli pārskatāmus un praktiski izmantojamus.
 
 
-## Projekta uzdevums
-Projekta mērķis bija izveidot programmu, kas, balstoties uz lietotāja ievadīto informāciju veic aprēķinus un salīdzina divus kredītus.
+## Projekta mērķis
+1) Ppielietot finanšu matemātikas zināšanas praksē.
+2) Attīstīt programmēšanas prasmes Python vidē.
+3) Izmantot datu struktūras reāla uzdevuma risināšanai.
+4) Apgūt darbu ar _Excel_ automatizāciju, izmantojot 'openpyxl'.
 
-Lietotājam ir arī iespēja apskatīties un izvērtēt, kā papildus iemaksas konkrētā mēnesī ietekmētu kredītu atmaksas grafiku.
 
-Aprēķinātie un apkopotie rezultāti tiek saglabāti _Excel_ failā `kreditu_salidzinasana`.
 ### Programmas darbības apraksts
 1. Lietotājs ievada informāciju par diviem kredītiem:
    - kredīta nosaukums;
@@ -16,17 +21,21 @@ Aprēķinātie un apkopotie rezultāti tiek saglabāti _Excel_ failā `kreditu_s
    - gada procentu likme %;
    - termiņš mēnešos.
 2. Programma aprēķina:
-   - anuitāti;
+   - anuitātes maksājumu;
    - katra mēneša procenta maksājumu;
    - par cik samazinās kredīts ik mēnesi;
    - atlikušo summu, kas jāmaksā.
-3. Tiek piedāvāta iespēa ievadīt papildus iemaksas kādā no mēnešiem. Ja lietotājs izvēlas to darīt, tad samazinās kopējās procentu izmaksas un atmaksas ilgums.
+3. Tiek piedāvāta iespēa ievadīt papildus iemaksas kādā no mēnešiem. Ja lietotājs izvēlas to darīt, tad samazinās kopējās procentu izmaksas un atmaksas ilgums, kā arī tiek pārrēķināts atmaksas grafiks.
 4. Rezultāti tiek saglabāti _Excel_ failā `kreditu_salidzinasana.xlsx`, kurā ir:
    – tabula ar bāzes informāciju par abiem kredītiem;
    – kredītu atmaksu grafiki dalījumā pa mēnešiem;
    – atmaksas grafiks pēc papildus iemaksām (2. darba lapa), ja tādas tiek veiktas.
 5. Izmantojot aizņēmuma koeficientu, tiek salīdzināts, kurš kredīts izdevīgāks.
 
+## Kā palaist projektu
+1. Instalē nepieciešamo bibliotēku 'pip install openpyxl';
+2. Palaiž programmu 'python main.py';
+3. Seko līdzi instrukcijām terminālī.
 
 ## Izmantotā Python bibliotēka
 **Openpyxl** – Python bibliotēka, kuru izmanto, lai izveidotu, rakstītu vai lasītu no _Excel_ faila.
@@ -50,8 +59,5 @@ Kodā tas redzams tieši darbībās ar papildus iemaksām. Piemēram,
 
 Programmas izstrādei izmantotas arī citas datu struktūras – **saraksti** un **vardnīcas**.
 
-
 ## Programmatūras izmantošanas metodes
 Programma paredzēta kredītu salīdzināšanai, ļaujot lietotājam ievadīt datus un modelēt dažādus atmaksas scenārijus, tai skaitā ar papildus iemaksām. Tā nodrošina skaidru vizualizāciju caur automatizēti ģenerētu _Excel_ failu, padarot rezultātu pārskatāmu un praktiski pielietojamu finanšu lēmumu pieņemšanā.
-
-Projektu iespējams pielietot arī priekšmetā _Finanšu matemātika_ atsevišķu uzdevumu pārbaudei un modelēšanai.
